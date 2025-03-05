@@ -24,6 +24,8 @@ ENV GO111MODULE=on \
 
 WORKDIR /build
 ADD go.mod go.sum ./
+RUN go env -w GOPROXY=https://goproxy.cn,direct
+RUN go env -w GOSUMDB=goproxy.cn/sumdb/sum.golang.org
 RUN go mod download
 COPY . .
 COPY --from=builder /web/build ./web/build
